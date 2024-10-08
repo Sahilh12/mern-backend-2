@@ -177,7 +177,13 @@ module.exports.updatePassword = catchAsyncError(async (req, res, next) => {
 })
 
 module.exports.logOut = catchAsyncError(async (req, res, next) => {
-    res.cookie("token", "")
+    res.cookie("token", "" , {
+        httpOnly:true,
+        expires: new Date(Date.now()),
+        sameSite:"None",
+        secure:true
+
+    })
     res.status(200).send("User Logged Out")
 })
 
